@@ -28,6 +28,61 @@ if (navMenu.classList.contains("active")) {
 menuBtn.textContent = "×";
 } else {
 menuBtn.textContent = "☰";
+  /* =========================
+   ADMIN LOGIN
+========================= */
+
+function adminLogin() {
+  const username = document.getElementById("adminUsername").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  const message = document.getElementById("loginMessage");
+
+  // DEMO LOGIN
+  const correctUsername = "admin";
+  const correctPassword = "alpha123";
+
+  if (username === correctUsername && password === correctPassword) {
+    document.getElementById("admin-login").style.display = "none";
+    document.getElementById("admin-dashboard").style.display = "block";
+
+    document.getElementById("totalMembers").textContent = "0";
+    document.getElementById("activeMembers").textContent = "0";
+    document.getElementById("todayAttendance").textContent = "0";
+    document.getElementById("expiringMembers").textContent = "0";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  } else {
+    message.textContent = "Invalid Admin ID or Password.";
+  }
+}
+
+
+/* =========================
+   ADMIN LOGOUT
+========================= */
+
+function adminLogout() {
+  document.getElementById("admin-dashboard").style.display = "none";
+  document.getElementById("admin-login").style.display = "flex";
+
+  document.getElementById("adminUsername").value = "";
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("loginMessage").textContent = "";
+}
+
+
+/* =========================
+   DEMO BUTTON MESSAGE
+========================= */
+
+function showDemoMessage() {
+  alert("This feature will be connected to the gym database in the next phase.");
+}
 }
 
 });
