@@ -776,9 +776,33 @@ WA
 
     <button onclick="adminLogin()">LOGIN TO DASHBOARD</button>
 
+    < <!-- ADMIN LOGIN -->
+<section id="admin-login" class="admin-login">
+  <div class="admin-box">
+    <span class="admin-label">ALPHA ADMIN</span>
+    <h2>Admin Login</h2>
+    <p>Gym management dashboard</p>
+
+    <input
+      type="text"
+      id="adminUsername"
+      placeholder="Admin ID"
+    >
+
+    <input
+      type="password"
+      id="adminPassword"
+      placeholder="Password"
+    >
+
+    <button type="button" onclick="adminLogin()">
+      LOGIN TO DASHBOARD
+    </button>
+
     <p id="loginMessage"></p>
   </div>
 </section>
+
 
 <!-- ADMIN DASHBOARD -->
 <section id="admin-dashboard" class="admin-dashboard">
@@ -790,7 +814,9 @@ WA
       <p>Gym management overview</p>
     </div>
 
-    <button onclick="adminLogout()" class="logout-btn">Logout</button>
+    <button onclick="adminLogout()" class="logout-btn">
+      Logout
+    </button>
   </div>
 
   <div class="dashboard-cards">
@@ -825,7 +851,9 @@ WA
 
     <div class="dashboard-title">
       <h3>Recent Enquiries</h3>
-      <button onclick="showDemoMessage()">+ Add Enquiry</button>
+      <button onclick="showDemoMessage()">
+        + Add Enquiry
+      </button>
     </div>
 
     <div class="empty-dashboard">
@@ -855,5 +883,11 @@ WA
 
   </div>
 
-  </section></body>
-        </html>
+</section>
+
+
+<!-- JAVASCRIPT — MUST BE LAST -->
+<script src="script.js"></script>
+
+</body>
+    </html>
