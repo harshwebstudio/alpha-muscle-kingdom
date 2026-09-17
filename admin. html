@@ -1,211 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALPHA Admin Panel</title>
+  <title>ALPHA Admin Login</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
     body {
+      margin: 0;
       background: #111;
       color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      padding: 30px 20px;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
+    .login-box {
+      width: 90%;
+      max-width: 400px;
+      background: #1d1d1d;
+      padding: 30px;
+      border-radius: 15px;
+      box-sizing: border-box;
     }
 
     h1 {
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #aaa;
-      margin-bottom: 30px;
-    }
-
-    .login-box,
-    .dashboard {
-      background: #1c1c1c;
-      padding: 25px;
-      border-radius: 15px;
-      margin-bottom: 25px;
+      text-align: center;
     }
 
     input {
       width: 100%;
       padding: 14px;
       margin: 8px 0;
+      box-sizing: border-box;
       border-radius: 8px;
       border: none;
     }
 
     button {
-      padding: 14px 20px;
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
       font-weight: bold;
-      margin-top: 10px;
+      cursor: pointer;
     }
 
-    .login-btn {
-      width: 100%;
-    }
-
-    .logout-btn {
-      background: #333;
-      color: white;
-    }
-
-    .message {
-      margin-top: 12px;
-      color: #ff7777;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 25px 0;
-    }
-
-    .card {
-      background: #252525;
-      padding: 20px;
-      border-radius: 12px;
-    }
-
-    .card h3 {
-      font-size: 30px;
-      margin-top: 8px;
-    }
-
-    @media (max-width: 600px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
+    #message {
+      text-align: center;
+      color: #ff5555;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="login-box">
 
-    <div id="loginSection" class="login-box">
-      <h1>ALPHA ADMIN</h1>
-      <p class="subtitle">Admin Login</p>
+    <h1>ALPHA ADMIN</h1>
 
-      <input
-        type="text"
-        id="username"
-        placeholder="Admin ID"
-      >
+    <input
+      type="text"
+      id="adminUsername"
+      placeholder="Admin ID"
+    >
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-      >
+    <input
+      type="password"
+      id="adminPassword"
+      placeholder="Password"
+    >
 
-      <button class="login-btn" onclick="login()">
-        LOGIN
-      </button>
+    <button onclick="adminLogin()">
+      LOGIN
+    </button>
 
-      <p id="message" class="message"></p>
-    </div>
-
-
-    <div id="dashboard" class="dashboard" style="display:none;">
-
-      <h1>Admin Dashboard</h1>
-      <p class="subtitle">ALPHA Gym Management</p>
-
-      <div class="cards">
-
-        <div class="card">
-          <p>Membership Enquiries</p>
-          <h3 id="enquiryCount">0</h3>
-        </div>
-
-        <div class="card">
-          <p>Members</p>
-          <h3>0</h3>
-        </div>
-
-        <div class="card">
-          <p>Attendance</p>
-          <h3>0</h3>
-        </div>
-
-      </div>
-
-      <h2>Membership Enquiries</h2>
-
-      <p style="color:#aaa; margin-top:10px;">
-        Enquiries will appear here after we connect the database.
-      </p>
-
-      <button class="logout-btn" onclick="logout()">
-        LOGOUT
-      </button>
-
-    </div>
+    <p id="message"></p>
 
   </div>
 
-
   <script>
-    function login() {
+
+    function adminLogin() {
 
       const username =
-        document.getElementById("username").value.trim();
+        document.getElementById("adminUsername").value.trim();
 
       const password =
-        document.getElementById("password").value;
-
-      const message =
-        document.getElementById("message");
+        document.getElementById("adminPassword").value;
 
       if (username === "admin" && password === "alpha123") {
 
-        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("message").style.color = "green";
 
-        document.getElementById("dashboard").style.display = "block";
-
-        message.textContent = "";
+        document.getElementById("message").textContent =
+          "Login Successful!";
 
       } else {
 
-        message.textContent =
+        document.getElementById("message").textContent =
           "Invalid Admin ID or Password.";
 
       }
-    }
-
-
-    function logout() {
-
-      document.getElementById("dashboard").style.display = "none";
-
-      document.getElementById("loginSection").style.display = "block";
-
-      document.getElementById("username").value = "";
-
-      document.getElementById("password").value = "";
 
     }
+
   </script>
 
 </body>
