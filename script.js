@@ -4,14 +4,17 @@ PAGE LOADER
 
 window.addEventListener("load", function () {
 
-const loader = document.getElementById("loader");
+  const loader = document.getElementById("loader");
 
-setTimeout(function () {
-loader.classList.add("hide");
-document.body.classList.add("loaded");
-}, 500);
+  if (loader) {
+    setTimeout(function () {
+      loader.classList.add("hide");
+      document.body.classList.add("loaded");
+    }, 500);
+  }
 
 });
+
 
 /* =========================
 MOBILE MENU
@@ -20,284 +23,400 @@ MOBILE MENU
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 
-menuBtn.addEventListener("click", function () {
+if (menuBtn && navMenu) {
 
-navMenu.classList.toggle("active");
+  menuBtn.addEventListener("click", function () {
 
-if (navMenu.classList.contains("active")) {
-menuBtn.textContent = "×";
-} else {
-menuBtn.textContent = "☰";
-  /* =========================
-   ADMIN LOGIN
+    navMenu.classList.toggle("active");
+
+    if (navMenu.classList.contains("active")) {
+      menuBtn.textContent = "×";
+    } else {
+      menuBtn.textContent = "☰";
+    }
+
+  });
+
+}
+
+
+const navLinks = document.querySelectorAll("#navMenu a");
+
+navLinks.forEach(function (link) {
+
+  link.addEventListener("click", function () {
+
+    if (navMenu) {
+      navMenu.classList.remove("active");
+    }
+
+    if (menuBtn) {
+      menuBtn.textContent = "☰";
+    }
+
+  });
+
+});
+
+
+/* =========================
+ADMIN LOGIN
 ========================= */
 
 function adminLogin() {
-  const username = document.getElementById("adminUsername").value.trim();
-  const password = document.getElementById("adminPassword").value;
 
-  const message = document.getElementById("loginMessage");
+  const usernameInput =
+    document.getElementById("adminUsername");
 
-  // DEMO LOGIN
+  const passwordInput =
+    document.getElementById("adminPassword");
+
+  const message =
+    document.getElementById("loginMessage");
+
+  const username =
+    usernameInput.value.trim();
+
+  const password =
+    passwordInput.value;
+
+  // DEMO LOGIN DETAILS
   const correctUsername = "admin";
   const correctPassword = "alpha123";
 
-  if (username === correctUsername && password === correctPassword) {
+
+  if (
+    username === correctUsername &&
+    password === correctPassword
+  ) {
+
     document.getElementById("admin-login").style.display = "none";
+
     document.getElementById("admin-dashboard").style.display = "block";
 
+
     document.getElementById("totalMembers").textContent = "0";
+
     document.getElementById("activeMembers").textContent = "0";
+
     document.getElementById("todayAttendance").textContent = "0";
+
     document.getElementById("expiringMembers").textContent = "0";
+
+
+    if (message) {
+      message.textContent = "";
+    }
+
 
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
 
+
   } else {
-    message.textContent = "Invalid Admin ID or Password.";
+
+    if (message) {
+      message.textContent =
+        "Invalid Admin ID or Password.";
+    }
+
   }
+
 }
 
 
 /* =========================
-   ADMIN LOGOUT
+ADMIN LOGOUT
 ========================= */
 
 function adminLogout() {
-  document.getElementById("admin-dashboard").style.display = "none";
-  document.getElementById("admin-login").style.display = "flex";
+
+  document.getElementById("admin-dashboard").style.display =
+    "none";
+
+  document.getElementById("admin-login").style.display =
+    "flex";
+
 
   document.getElementById("adminUsername").value = "";
+
   document.getElementById("adminPassword").value = "";
+
   document.getElementById("loginMessage").textContent = "";
+
 }
 
 
 /* =========================
-   DEMO BUTTON MESSAGE
+DEMO BUTTON MESSAGE
 ========================= */
 
 function showDemoMessage() {
-  alert("This feature will be connected to the gym database in the next phase.");
+
+  alert(
+    "This feature will be connected to the gym database in the next phase."
+  );
+
 }
-}
 
-});
-
-const navLinks = document.querySelectorAll("#navMenu a");
-
-navLinks.forEach(function (link) {
-
-link.addEventListener("click", function () {
-
-navMenu.classList.remove("active");
-
-menuBtn.textContent = "☰";
-
-});
-
-});
 
 /* =========================
 COPYRIGHT YEAR
 ========================= */
 
-document.getElementById("year").textContent =
-new Date().getFullYear();
+const yearElement =
+  document.getElementById("year");
+
+if (yearElement) {
+  yearElement.textContent =
+    new Date().getFullYear();
+}
+
 
 /* =========================
 SCROLL REVEAL
 ========================= */
 
 const revealElements =
-document.querySelectorAll(".reveal");
+  document.querySelectorAll(".reveal");
 
-const revealObserver =
-new IntersectionObserver(
-function (entries) {
 
-  entries.forEach(function (entry) {
+if (revealElements.length > 0) {
 
-    if (entry.isIntersecting) {
+  const revealObserver =
+    new IntersectionObserver(
+      function (entries) {
 
-      entry.target.classList.add("visible");
+        entries.forEach(function (entry) {
 
-      revealObserver.unobserve(entry.target);
+          if (entry.isIntersecting) {
 
-    }
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+  revealElements.forEach(function (element) {
+
+    revealObserver.observe(element);
 
   });
 
-},
-{
-  threshold: 0.12
 }
 
-);
-
-revealElements.forEach(function (element) {
-
-revealObserver.observe(element);
-
-});
 
 /* =========================
 GOAL SELECTOR
 ========================= */
 
 const goalButtons =
-document.querySelectorAll(".goal-btn");
+  document.querySelectorAll(".goal-btn");
 
 const goalResult =
-document.getElementById("goalResult");
+  document.getElementById("goalResult");
+
 
 const goalMessages = {
 
-strength:
-"Start with structured strength training and focus on progressive, consistent workouts.",
+  strength:
+    "Start with structured strength training and focus on progressive, consistent workouts.",
 
-fitness:
-"Start with balanced fitness sessions combining resistance training, movement and conditioning.",
+  fitness:
+    "Start with balanced fitness sessions combining resistance training, movement and conditioning.",
 
-training:
-"Personal training can provide more individualized coaching based on your experience and goals."
+  training:
+    "Personal training can provide more individualized coaching based on your experience and goals."
 
 };
 
+
 goalButtons.forEach(function (button) {
 
-button.addEventListener("click", function () {
+  button.addEventListener("click", function () {
 
-goalButtons.forEach(function (btn) {
-  btn.classList.remove("active");
+    goalButtons.forEach(function (btn) {
+
+      btn.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+
+    const selectedGoal =
+      button.getAttribute("data-goal");
+
+
+    if (goalResult) {
+
+      goalResult.textContent =
+        goalMessages[selectedGoal];
+
+    }
+
+  });
+
 });
 
-button.classList.add("active");
-
-const selectedGoal =
-  button.getAttribute("data-goal");
-
-goalResult.textContent =
-  goalMessages[selectedGoal];
-
-});
-
-});
 
 /* =========================
 FAQ ACCORDION
 ========================= */
 
 const faqQuestions =
-document.querySelectorAll(".faq-question");
+  document.querySelectorAll(".faq-question");
+
 
 faqQuestions.forEach(function (question) {
 
-question.addEventListener("click", function () {
+  question.addEventListener("click", function () {
 
-const currentFaq =
-  question.parentElement;
+    const currentFaq =
+      question.parentElement;
 
-const isOpen =
-  currentFaq.classList.contains("open");
+    const isOpen =
+      currentFaq.classList.contains("open");
 
 
-document.querySelectorAll(".faq").forEach(function (faq) {
+    document.querySelectorAll(".faq").forEach(function (faq) {
 
-  faq.classList.remove("open");
+      faq.classList.remove("open");
 
-  const answer =
-    faq.querySelector(".faq-answer");
 
-  answer.style.maxHeight = null;
+      const answer =
+        faq.querySelector(".faq-answer");
+
+
+      if (answer) {
+        answer.style.maxHeight = null;
+      }
+
+    });
+
+
+    if (!isOpen) {
+
+      currentFaq.classList.add("open");
+
+
+      const answer =
+        currentFaq.querySelector(".faq-answer");
+
+
+      if (answer) {
+
+        answer.style.maxHeight =
+          answer.scrollHeight + "px";
+
+      }
+
+    }
+
+  });
 
 });
 
-
-if (!isOpen) {
-
-  currentFaq.classList.add("open");
-
-  const answer =
-    currentFaq.querySelector(".faq-answer");
-
-  answer.style.maxHeight =
-    answer.scrollHeight + "px";
-
-}
-
-});
-
-});
 
 /* =========================
 FREE TRIAL FORM
 ========================= */
 
 const trialForm =
-document.getElementById("trialForm");
+  document.getElementById("trialForm");
 
 const formMessage =
-document.getElementById("formMessage");
+  document.getElementById("formMessage");
 
-trialForm.addEventListener("submit", function (event) {
 
-event.preventDefault();
+if (trialForm) {
 
-const name =
-document.getElementById("name").value.trim();
+  trialForm.addEventListener("submit", function (event) {
 
-const phone =
-document.getElementById("phone").value.trim();
+    event.preventDefault();
 
-const goal =
-document.getElementById("goal").value;
 
-if (!name || !phone || !goal) {
+    const name =
+      document.getElementById("name").value.trim();
 
-formMessage.textContent =
-  "Please complete all fields.";
+    const phone =
+      document.getElementById("phone").value.trim();
 
-return;
+    const goal =
+      document.getElementById("goal").value;
+
+
+    if (!name || !phone || !goal) {
+
+      if (formMessage) {
+        formMessage.textContent =
+          "Please complete all fields.";
+      }
+
+      return;
+
+    }
+
+
+    if (formMessage) {
+
+      formMessage.textContent =
+        "Request received. The gym team can contact you shortly.";
+
+    }
+
+
+    trialForm.reset();
+
+  });
 
 }
 
-formMessage.textContent =
-"Request received. The gym team can contact you shortly.";
-
-trialForm.reset();
-
-});
 
 /* =========================
 BACK TO TOP
 ========================= */
 
 const topBtn =
-document.getElementById("topBtn");
+  document.getElementById("topBtn");
 
-window.addEventListener("scroll", function () {
 
-if (window.scrollY > 500) {
+if (topBtn) {
 
-topBtn.classList.add("show");
+  window.addEventListener("scroll", function () {
 
-} else {
+    if (window.scrollY > 500) {
 
-topBtn.classList.remove("show");
+      topBtn.classList.add("show");
+
+    } else {
+
+      topBtn.classList.remove("show");
+
+    }
+
+  });
+
+
+  topBtn.addEventListener("click", function () {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
 
 }
-
-});
-
-topBtn.addEventListener("click", function () {
-
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
-
-});
