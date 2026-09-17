@@ -1,28 +1,248 @@
+/* =========================
+PAGE LOADER
+========================= */
+
+window.addEventListener("load", function () {
+
+const loader = document.getElementById("loader");
+
+setTimeout(function () {
+loader.classList.add("hide");
+document.body.classList.add("loaded");
+}, 500);
+
+});
+
+/* =========================
+MOBILE MENU
+========================= */
+
 const menuBtn = document.getElementById("menuBtn");
-
 const navMenu = document.getElementById("navMenu");
-
 
 menuBtn.addEventListener("click", function () {
 
-  navMenu.classList.toggle("active");
+navMenu.classList.toggle("active");
+
+if (navMenu.classList.contains("active")) {
+menuBtn.textContent = "×";
+} else {
+menuBtn.textContent = "☰";
+}
 
 });
-
 
 const navLinks = document.querySelectorAll("#navMenu a");
 
-
 navLinks.forEach(function (link) {
 
-  link.addEventListener("click", function () {
+link.addEventListener("click", function () {
 
-    navMenu.classList.remove("active");
+navMenu.classList.remove("active");
+
+menuBtn.textContent = "☰";
+
+});
+
+});
+
+/* =========================
+COPYRIGHT YEAR
+========================= */
+
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+/* =========================
+SCROLL REVEAL
+========================= */
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+const revealObserver =
+new IntersectionObserver(
+function (entries) {
+
+  entries.forEach(function (entry) {
+
+    if (entry.isIntersecting) {
+
+      entry.target.classList.add("visible");
+
+      revealObserver.unobserve(entry.target);
+
+    }
 
   });
+
+},
+{
+  threshold: 0.12
+}
+
+);
+
+revealElements.forEach(function (element) {
+
+revealObserver.observe(element);
+
+});
+
+/* =========================
+GOAL SELECTOR
+========================= */
+
+const goalButtons =
+document.querySelectorAll(".goal-btn");
+
+const goalResult =
+document.getElementById("goalResult");
+
+const goalMessages = {
+
+strength:
+"Start with structured strength training and focus on progressive, consistent workouts.",
+
+fitness:
+"Start with balanced fitness sessions combining resistance training, movement and conditioning.",
+
+training:
+"Personal training can provide more individualized coaching based on your experience and goals."
+
+};
+
+goalButtons.forEach(function (button) {
+
+button.addEventListener("click", function () {
+
+goalButtons.forEach(function (btn) {
+  btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+const selectedGoal =
+  button.getAttribute("data-goal");
+
+goalResult.textContent =
+  goalMessages[selectedGoal];
+
+});
+
+});
+
+/* =========================
+FAQ ACCORDION
+========================= */
+
+const faqQuestions =
+document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(function (question) {
+
+question.addEventListener("click", function () {
+
+const currentFaq =
+  question.parentElement;
+
+const isOpen =
+  currentFaq.classList.contains("open");
+
+
+document.querySelectorAll(".faq").forEach(function (faq) {
+
+  faq.classList.remove("open");
+
+  const answer =
+    faq.querySelector(".faq-answer");
+
+  answer.style.maxHeight = null;
 
 });
 
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+if (!isOpen) {
+
+  currentFaq.classList.add("open");
+
+  const answer =
+    currentFaq.querySelector(".faq-answer");
+
+  answer.style.maxHeight =
+    answer.scrollHeight + "px";
+
+}
+
+});
+
+});
+
+/* =========================
+FREE TRIAL FORM
+========================= */
+
+const trialForm =
+document.getElementById("trialForm");
+
+const formMessage =
+document.getElementById("formMessage");
+
+trialForm.addEventListener("submit", function (event) {
+
+event.preventDefault();
+
+const name =
+document.getElementById("name").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const goal =
+document.getElementById("goal").value;
+
+if (!name || !phone || !goal) {
+
+formMessage.textContent =
+  "Please complete all fields.";
+
+return;
+
+}
+
+formMessage.textContent =
+"Request received. The gym team can contact you shortly.";
+
+trialForm.reset();
+
+});
+
+/* =========================
+BACK TO TOP
+========================= */
+
+const topBtn =
+document.getElementById("topBtn");
+
+window.addEventListener("scroll", function () {
+
+if (window.scrollY > 500) {
+
+topBtn.classList.add("show");
+
+} else {
+
+topBtn.classList.remove("show");
+
+}
+
+});
+
+topBtn.addEventListener("click", function () {
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+
+});
