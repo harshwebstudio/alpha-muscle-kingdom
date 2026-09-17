@@ -764,5 +764,96 @@ WA
 
   <!-- BACK TO TOP -->  <button id="topBtn" class="top-btn" aria-label="Back to top">
     ↑
-  </button>  <script src="script.js"></script></body>
+  </button>  <script src="script.js"></script><!-- ADMIN LOGIN -->
+<section id="admin-login" class="admin-login">
+  <div class="admin-box">
+    <span class="admin-label">ALPHA ADMIN</span>
+    <h2>Admin Login</h2>
+    <p>Gym management dashboard</p>
+
+    <input type="text" id="adminUsername" placeholder="Admin ID">
+    <input type="password" id="adminPassword" placeholder="Password">
+
+    <button onclick="adminLogin()">LOGIN TO DASHBOARD</button>
+
+    <p id="loginMessage"></p>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+<section id="admin-dashboard" class="admin-dashboard">
+
+  <div class="dashboard-header">
+    <div>
+      <span class="admin-label">ALPHA THE MUSCLE KINGDOM</span>
+      <h2>Admin Dashboard</h2>
+      <p>Gym management overview</p>
+    </div>
+
+    <button onclick="adminLogout()" class="logout-btn">Logout</button>
+  </div>
+
+  <div class="dashboard-cards">
+
+    <div class="dashboard-card">
+      <span>👥</span>
+      <h3 id="totalMembers">0</h3>
+      <p>Total Members</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span>🟢</span>
+      <h3 id="activeMembers">0</h3>
+      <p>Active Members</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span>📅</span>
+      <h3 id="todayAttendance">0</h3>
+      <p>Today's Attendance</p>
+    </div>
+
+    <div class="dashboard-card">
+      <span>⚠️</span>
+      <h3 id="expiringMembers">0</h3>
+      <p>Expiring Memberships</p>
+    </div>
+
+  </div>
+
+  <div class="dashboard-section">
+
+    <div class="dashboard-title">
+      <h3>Recent Enquiries</h3>
+      <button onclick="showDemoMessage()">+ Add Enquiry</button>
+    </div>
+
+    <div class="empty-dashboard">
+      <span>📋</span>
+      <h4>No enquiries yet</h4>
+      <p>New website enquiries will appear here.</p>
+    </div>
+
+  </div>
+
+  <div class="dashboard-section">
+
+    <div class="dashboard-title">
+      <h3>Gym Management</h3>
+    </div>
+
+    <div class="management-grid">
+
+      <button onclick="showDemoMessage()">👥 Members</button>
+      <button onclick="showDemoMessage()">📅 Attendance</button>
+      <button onclick="showDemoMessage()">💳 Memberships</button>
+      <button onclick="showDemoMessage()">👨‍🏫 Trainers</button>
+      <button onclick="showDemoMessage()">📋 Enquiries</button>
+      <button onclick="showDemoMessage()">⚙️ Settings</button>
+
+    </div>
+
+  </div>
+
+  </section></body>
         </html>
